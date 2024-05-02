@@ -10,12 +10,17 @@ function App() {
   const [readingTime, setReadingTime] = useState(0)
 
   const handleAddToBookmark = blog => {
-    
-    const newBookmarks = [...bookmarks, blog];
-    setBookmarks(newBookmarks);
+    if (!bookmarks.some(item => blog.id  ===item.id )) {
+      console.log(blog);
+      const newBookmarks = [...bookmarks, blog];
+      setBookmarks(newBookmarks);
+  } else {
+      alert("Blog already exists in bookmarks.")
+  }
   }
 
   const handleMarkAsRead = (id, time) =>{
+    console.log(time)
     const newReadingTime = readingTime + time;
     setReadingTime(newReadingTime);
     // remove the read blog from bookmark
@@ -27,10 +32,10 @@ function App() {
   return (
     <>
       <Header/>
-      <div className='md:flex max-w-7xl mx-auto'>
+      <div className='md:flex max-w-7xl mx-auto py-5'>
       
        <Blogs  handleAddToBookmark={handleAddToBookmark} handleMarkAsRead={handleMarkAsRead} />
-       <Bookmarks bookmarks={bookmarks}></Bookmarks>
+       <Bookmarks bookmarks={bookmarks} readingTime={readingTime} handleMarkAsRead={handleMarkAsRead} ></Bookmarks>
       </div>
     </>
   )

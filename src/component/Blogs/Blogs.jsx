@@ -12,7 +12,7 @@ function Blogs({ handleAddToBookmark, handleMarkAsRead}) {
      .then(data=>setBlogs(data))
       },[])  
 return (
-   <div className="md:w-2/3">
+   <div className="md:w-2/3 overflow-y-scroll h-[500px]">
 {
     blogs.map(blog=> <Blog blog={blog} key={blog.id}    handleAddToBookmark={handleAddToBookmark}
         handleMarkAsRead={handleMarkAsRead} ></Blog>)
